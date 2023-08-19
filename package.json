@@ -50,12 +50,12 @@
   },
   "homepage": "https://github.com/haroonrashid2210/multi-state-react#readme",
   "keywords": [
-  "react",
-  "hooks",
-  "state management",
-  "multi-state",
-  "hook",
-  "useState",
-  "multi-state-react",
+    "react",
+    "hooks",
+    "state management",
+    "multi-state",
+    "hook",
+    "useState",
+    "multi-state-react"
   ]
 }
