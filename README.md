@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# use-multi-state
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+`use-multi-state` is a custom React hook that provides a convenient way to manage multiple state values in a functional component using the `useState` hook. It allows you to easily update and reset multiple state properties simultaneously.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+You can install `use-multi-state` using npm or yarn:
 
-### `npm start`
+```bash
+npm install use-multi-state
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+or
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+yarn add use-multi-state
+```
 
-### `npm test`
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Import the useMultiState hook in your React component and use it to manage your state:
 
-### `npm run build`
+```js
+import React from "react";
+import { useMultiState } from "use-multi-state";
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+function MyComponent() {
+  // Define your initial state object
+  const initialState = {
+    counter: 0,
+    name: "",
+    isActive: false,
+  };
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  // Use the useMultiState hook with your initial state
+  const { multiState, resetState, setMultiState } = useMultiState(initialState);
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  const handleIncrement = () => {
+    // Update a specific property in the state
+    setMultiState(multiState.counter + 1, "counter");
+  };
 
-### `npm run eject`
+  const handleToggleActive = () => {
+    // Toggle the 'isActive' property
+    setMultiState(!multiState.isActive, "isActive");
+  };
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  const handleReset = () => {
+    // Reset the state to the initial values
+    resetState();
+  };
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  return (
+    <div>
+      <p>Counter: {multiState.counter}</p>
+      <p>Name: {multiState.name}</p>
+      <p>Active: {multiState.isActive ? "Yes" : "No"}</p>
+      <button onClick={handleIncrement}>Increment</button>
+      <button onClick={handleToggleActive}>Toggle Active</button>
+      <button onClick={handleReset}>Reset</button>
+    </div>
+  );
+}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+export default MyComponent;
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## API
 
-## Learn More
+`useMultiState(initialState)`
+A custom hook that initializes the state and provides functions to update and reset the state.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`initialState`: An object representing the initial state values.
+Returns an object with the following properties:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `multiState`: The current state object.
+- `resetState(value)`: Resets the state to its initial values. Optionally, you can provide a custom value to reset the state to.
+- `setMultiState(value, key?)`: Updates the state. If key is provided, it updates a specific property; otherwise, it merges the value into the current state.
