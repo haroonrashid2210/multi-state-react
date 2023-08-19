@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 /**
  * Custom hook that provides multi-state management for a given object.
@@ -6,12 +6,14 @@ import { useState } from "react";
  * @template T - The type of the initial state object.
  * @param {T} initialState - The initial state object.
  * @returns {{
- *   multiState: T,
+ *   state: T,
  *   resetState: (value?: any) => void,
- *   setMultiState: (value: any, key?: keyof T) => void
- * }} An object containing multiState, resetState, and setMultiState functions.
+ *   setState: (value: any, key?: keyof T) => void,
+ *   watchers: any[]
+ * }} An object containing state, resetState, setState, and watchers properties.
  */
 export const useMultiState = <T extends object>(initialState: T) => {
+  // Use the useState hook to manage the state
   const [state, setState] = useState<T>(initialState);
 
   /**
@@ -20,9 +22,12 @@ export const useMultiState = <T extends object>(initialState: T) => {
    * @param {any} value - The value to be set or merged into the state.
    * @param {keyof T} key - Optional key specifying a specific property to update in the state.
    */
-  const setMultiState = (value: any, key?: keyof T) => {
-    if (key) setState((prev: any) => ({ ...prev, [key]: value }));
-    else setState((prev: any) => ({ ...prev, ...value }));
+  const setState = (value: any, key?: keyof T) => {
+    if (key) {
+      setState((prev: T) => ({ ...prev, [key]: value }));
+    } else {
+      setState((prev: T) => ({ ...prev, ...value }));
+    }
   };
 
   /**
@@ -31,13 +36,20 @@ export const useMultiState = <T extends object>(initialState: T) => {
    * @param {any} value - Optional value to set the state to (default: initialState).
    */
   const resetState = (value?: any) => {
-    if (value) setState(value);
-    else setState(initialState);
+    if (value) {
+      setState(value);
+    } else {
+      setState(initialState);
+    }
   };
 
+  // Create an array containing all values inside the object if T is an object, otherwise, just include T in the array
+  const watchers: any[] = Array.isArray(state) ? [state] : Object.values(state);
+
   return {
-    multiState: state,
+    state,
     resetState,
-    setMultiState,
+    setState,
+    watchers,
   };
 };
