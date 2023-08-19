@@ -1,19 +1,19 @@
-# use-multi-state
+# multi-state-react
 
-`use-multi-state` is a custom React hook that provides a convenient way to manage multiple state values in a functional component using the `useState` hook. It allows you to easily update and reset multiple state properties simultaneously.
+`multi-state-react` is a custom React hook that provides a convenient way to manage multiple state values in a functional component using the `useState` hook. It allows you to easily update and reset multiple state properties simultaneously.
 
 ## Installation
 
-You can install `use-multi-state` using npm or yarn:
+You can install `multi-state-react` using npm or yarn:
 
 ```bash
-npm install use-multi-state
+npm install multi-state-react
 ```
 
 or
 
 ```bash
-yarn add use-multi-state
+yarn add multi-state-react
 ```
 
 ## Usage
@@ -21,43 +21,32 @@ yarn add use-multi-state
 Import the useMultiState hook in your React component and use it to manage your state:
 
 ```js
-import React from "react";
-import { useMultiState } from "use-multi-state";
+import React, { useEffect } from "react";
+import { useMultiState } from "multi-state-react";
 
 function MyComponent() {
   // Define your initial state object
   const initialState = {
-    counter: 0,
-    name: "",
-    isActive: false,
+    page: 0,
+    nodeCount: 0,
+    searchTerm: '',
   };
 
   // Use the useMultiState hook with your initial state
-  const { multiState, resetState, setMultiState } = useMultiState(initialState);
+  const paginationState = useMultiState(initialState);
 
-  const handleIncrement = () => {
-    // Update a specific property in the state
-    setMultiState(multiState.counter + 1, "counter");
-  };
+  useEffect(() => {
+    fetchData()
+  }, [...paginationState.watchers]) // [page, nodeCount, searchTerm]
 
-  const handleToggleActive = () => {
-    // Toggle the 'isActive' property
-    setMultiState(!multiState.isActive, "isActive");
-  };
-
-  const handleReset = () => {
-    // Reset the state to the initial values
-    resetState();
-  };
+  const fetchData = async () => {
+    const response = await fetch('api')
+    paginationState.setState(response.nodeCount, 'nodeCount')
+  }
 
   return (
     <div>
-      <p>Counter: {multiState.counter}</p>
-      <p>Name: {multiState.name}</p>
-      <p>Active: {multiState.isActive ? "Yes" : "No"}</p>
-      <button onClick={handleIncrement}>Increment</button>
-      <button onClick={handleToggleActive}>Toggle Active</button>
-      <button onClick={handleReset}>Reset</button>
+      {/* Some component */}
     </div>
   );
 }
@@ -75,4 +64,9 @@ Returns an object with the following properties:
 
 - `multiState`: The current state object.
 - `resetState(value)`: Resets the state to its initial values. Optionally, you can provide a custom value to reset the state to.
-- `setMultiState(value, key?)`: Updates the state. If key is provided, it updates a specific property; otherwise, it merges the value into the current state.
+- `setMultiState(value, key?)`: Updates the state. If the key is provided, it updates a specific property; otherwise, it merges the value into the current state.
+- `watchers`: Array of state first-level hierarchy keys
+
+---
+
+MIT @ [haroonrashid2210](https://github.com/haroonrashid2210/multi-state-react)
