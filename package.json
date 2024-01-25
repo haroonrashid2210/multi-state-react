@@ -42,13 +42,6 @@
     "type": "git",
     "url": "git+https://github.com/haroonrashid2210/multi-state-react.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/haroonrashid2210/multi-state-react/issues"
-  },
-  "homepage": "https://github.com/haroonrashid2210/multi-state-react#readme",
   "keywords": [
     "react",
     "hooks",
@@ -57,5 +50,11 @@
     "hook",
     "useState",
     "multi-state-react"
-  ]
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haroonrashid2210/multi-state-react/issues"
+  },
+  "homepage": "https://github.com/haroonrashid2210/multi-state-react#readme"
 }
