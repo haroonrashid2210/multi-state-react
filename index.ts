@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 /**
  * Custom hook that provides multi-state management for a given object.
@@ -14,7 +14,7 @@ import { useState } from 'react';
  */
 export const useMultiState = <T extends object>(initialState: T) => {
   // Use the useState hook to manage the state
-  const [state, setState] = useState<T>(initialState);
+  const [state, _setState] = useState<T>(initialState)
 
   /**
    * Function to set multiple state values at once.
@@ -24,11 +24,11 @@ export const useMultiState = <T extends object>(initialState: T) => {
    */
   const setState = (value: any, key?: keyof T) => {
     if (key) {
-      setState((prev: T) => ({ ...prev, [key]: value }));
+      _setState((prev: T) => ({ ...prev, [key]: value }))
     } else {
-      setState((prev: T) => ({ ...prev, ...value }));
+      _setState((prev: T) => ({ ...prev, ...value }))
     }
-  };
+  }
 
   /**
    * Function to reset the state to its initial value or a provided value.
@@ -37,19 +37,15 @@ export const useMultiState = <T extends object>(initialState: T) => {
    */
   const resetState = (value?: any) => {
     if (value) {
-      setState(value);
+      _setState(value)
     } else {
-      setState(initialState);
+      _setState(initialState)
     }
-  };
-
-  // Create an array containing all values inside the object if T is an object, otherwise, just include T in the array
-  const watchers: any[] = Array.isArray(state) ? [state] : Object.values(state);
+  }
 
   return {
     state,
     resetState,
     setState,
-    watchers,
-  };
-};
+  }
+}
