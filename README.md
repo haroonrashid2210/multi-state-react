@@ -37,7 +37,7 @@ function MyComponent() {
 
   useEffect(() => {
     fetchData()
-  }, [...paginationState.watchers]) // [page, nodeCount, searchTerm]
+  }, [])
 
   const fetchData = async () => {
     const response = await fetch('api')
@@ -65,7 +65,6 @@ Returns an object with the following properties:
 - `multiState`: The current state object.
 - `resetState(value)`: Resets the state to its initial values. Optionally, you can provide a custom value to reset the state to.
 - `setMultiState(value, key?)`: Updates the state. If the key is provided, it updates a specific property; otherwise, it merges the value into the current state.
-- `watchers`: Array of state first-level hierarchy keys
 
 ---
 
