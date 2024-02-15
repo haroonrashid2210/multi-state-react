@@ -1,7 +1,7 @@
 {
   "name": "multi-state-react",
   "version": "1.0.2",
-  "main": "index.js",
+  "main": "index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/haroonrashid2210/multi-state-react.git"
