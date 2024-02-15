@@ -1,47 +1,22 @@
 {
   "name": "multi-state-react",
-  "version": "1.0.1",
-  "private": false,
-  "dependencies": {
-    "react": "^17.0.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "version": "1.0.2",
   "main": "index.js",
-  "devDependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.2"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/haroonrashid2210/multi-state-react.git"
+  },
+  "author": "Haroon Rashid",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@types/react": "^18.2.55",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "build": "tsc"
   },
   "keywords": [
     "react",
@@ -52,8 +27,6 @@
     "useState",
     "multi-state-react"
   ],
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/haroonrashid2210/multi-state-react/issues"
   },

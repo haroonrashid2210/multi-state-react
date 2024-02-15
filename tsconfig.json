@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "lib": ["DOM", "ESNext"],
+    "target": "es5",
+    "jsx": "react",
+    "downlevelIteration": true,
+    "module": "commonjs",
+    "outDir": "dist",
+    "strict": true,
+    "rootDir": ".",
+    "declaration": true,
+    "esModuleInterop": true
+  },
+  "tsd": {
+    "compilerOptions": {
+      "strict": false
+    }
+  },
+  "files": [
+    "index.ts"
+    // Add other files if necessary
+  ],
+  "exclude": ["node_modules", "dist"]
+}
