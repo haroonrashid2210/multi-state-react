@@ -28,7 +28,7 @@ function MyComponent() {
   // Define your initial state object
   const initialState = {
     page: 0,
-    nodeCount: 0,
+    nodesCount: 0,
     searchTerm: '',
   };
 
@@ -40,8 +40,9 @@ function MyComponent() {
   }, [])
 
   const fetchData = async () => {
-    const response = await fetch('api')
-    paginationState.setState(response.nodeCount, 'nodeCount')
+    const response = await fetch('https://example.com')
+    // response = { nodes: any[], nodesCount: number }
+    paginationState.setState({ nodesCount: response.nodesCount })
   }
 
   return (
@@ -64,7 +65,7 @@ Returns an object with the following properties:
 
 - `multiState`: The current state object.
 - `resetState(value)`: Resets the state to its initial values. Optionally, you can provide a custom value to reset the state to.
-- `setMultiState(value, key?)`: Updates the state. If the key is provided, it updates a specific property; otherwise, it merges the value into the current state.
+- `setMultiState(value)`: Updates and patch the state with the provided value
 
 ---
 
