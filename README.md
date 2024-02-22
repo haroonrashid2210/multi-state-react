@@ -1,10 +1,10 @@
-# Multi-State-React
+# Multi-State Management Hook for React
 
-`multi-state-react` is a custom React hook designed to streamline the management of multiple state values within functional components using the `useState` hook. It simplifies the process of updating and resetting multiple state properties simultaneously.
+The `useMultiState` hook is a custom React hook that facilitates multi-state management for a given object. This hook is designed to simplify the process of managing multiple state variables within a React component, particularly when dealing with complex state structures.
 
 ## Installation
 
-You can effortlessly integrate `multi-state-react` into your project using npm or yarn:
+You can install the package using npm or yarn:
 
 ```bash
 npm install multi-state-react
@@ -18,61 +18,58 @@ yarn add multi-state-react
 
 ## Usage
 
-To utilize the `useMultiState` hook within your React components, follow these simple steps:
+Import the `useMultiState` hook in your React component and initialize it with an initial state object. The hook returns an object containing the current state, a function to set multiple state values at once, and a function to reset the state to its initial value.
 
 ```javascript
-import React, { useEffect } from "react";
-import { useMultiState } from "multi-state-react";
+import React from 'react';
+import { useMultiState } from 'multi-state-react';
 
-function MyComponent() {
-  // Define your initial state object
-  const initialState = {
-    page: 0,
-    nodesCount: 0,
-    searchTerm: '',
+const MyComponent = () => {
+  // Initialize the hook with an initial state object
+  const { state, setState, resetState } = useMultiState({
+    counter: 0,
+    text: '',
+    isCompleted: false,
+  });
+
+  // Example of using the state and setState function
+  const handleIncrement = () => {
+    setState({ counter: state.counter + 1 });
   };
 
-  // Utilize the useMultiState hook with your initial state
-  const multiState = useMultiState(initialState);
+  const handleInputChange = (event) => {
+    setState({ text: event.target.value });
+  };
 
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  const fetchData = async () => {
-    const response = await fetch('https://example.com')
-    // response = { nodes: any[], nodesCount: number }
-    multiState.setMultiState({ nodesCount: response.nodesCount })
-  }
+  const handleReset = () => {
+    resetState(); // Reset to initial state
+  };
 
   return (
     <div>
-      {/* Your components */}
+      <p>Counter: {state.counter}</p>
+      <input type="text" value={state.text} onChange={handleInputChange} />
+      <button onClick={handleIncrement}>Increment</button>
+      <button onClick={handleReset}>Reset</button>
     </div>
   );
-}
+};
 
 export default MyComponent;
 ```
 
 ## API
 
-### `useMultiState(initialState)`
+The `useMultiState` hook returns an object with the following properties:
 
-A custom hook that initializes the state and provides functions to update and reset the state.
+- `state`: The current state object.
+- `setState(value)`: A function to set multiple state values at once. It accepts a partial state object and merges it with the current state.
+- `resetState(value?)`: A function to reset the state to its initial value. If a value is provided, it sets the state to that value; otherwise, it resets the state to the initial state object passed during initialization.
 
-- `initialState`: An object representing the initial state values.
+## Contributing
 
-Returns an object with the following properties:
+Contributions are welcome! Please feel free to open issues or submit pull requests for any improvements or bug fixes.
 
-- `multiState`: The current state object.
-- `resetState(value)`: Resets the state to its initial values. Optionally, you can provide a custom value to reset the state to.
-- `setMultiState(value)`: Updates and patches the state with the provided value.
+## License
 
-## Benefits
-
-- **Simplified State Management**: Manage multiple state properties effortlessly within your components.
-- **Efficient Updates**: Update and reset multiple state values simultaneously, improving code readability and maintainability.
-- **Compatible with useState**: Seamlessly integrates with React's `useState` hook, ensuring compatibility with existing codebases.
-
-Enhance your React projects with `multi-state-react`, simplifying state management and improving overall development efficiency.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/haroonrashid2210/multi-state-react/blob/main/LICENSE) file for details.

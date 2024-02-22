@@ -1,6 +1,6 @@
 {
   "name": "multi-state-react",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "index.ts",
   "repository": {
     "type": "git",
@@ -11,12 +11,14 @@
   "private": false,
   "devDependencies": {
     "@types/react": "^18.2.55",
+    "dotenv": "^8.2.0",
+    "node-fetch": "^3.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "node init && tsc"
   },
   "keywords": [
     "react",
