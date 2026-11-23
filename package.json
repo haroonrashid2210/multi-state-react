@@ -11,14 +11,12 @@
   "private": false,
   "devDependencies": {
     "@types/react": "^18.2.55",
-    "dotenv": "^8.2.0",
-    "node-fetch": "^3.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "build": "node init && tsc"
+    "build": "tsc"
   },
   "keywords": [
     "react",
